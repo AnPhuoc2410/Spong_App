@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:spong_app/data/repository/repository.dart';
 
 Future<void> main() async {
   await dotenv.load();
+
+  var repository = MusicRepository();
+  var songs = await repository.loadData();
+  if (songs != null){
+    for (var song in songs) {
+      debugPrint(song.toString());
+    }
+  }
 }
 
 class MusicApp extends StatelessWidget {

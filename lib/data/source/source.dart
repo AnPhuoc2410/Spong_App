@@ -11,12 +11,12 @@ abstract interface class DataSource {
 class RemoteDataSource implements DataSource {
   @override
   Future<List<Song>?> loadData() async {
-    final url = dotenv.env['API_URL'];
+    final url = dotenv.env['URL'];
     final response = await http.get(Uri.parse(url!));
     if (response.statusCode == 200) {
       final bodyContent = utf8.decode(response.bodyBytes);//Dùng utf8.decode để chuyển bytes thành chuỗi (tránh lỗi tiếng Việt/Kanji bị sai encoding
       var songWrapper = jsonDecode(bodyContent) as Map;
-      var songList = songWrapper['songs'];
+      var songList = songWrapper['songs'] as List;
       return songList.map((song) => Song.fromJson(song)).toList();
     } else {
       throw Exception('Failed to load data');

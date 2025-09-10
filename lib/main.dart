@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:spong_app/data/repository/repository.dart';
+import '../data/repository/repository.dart';
+import '../ui/home/home.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -12,15 +13,7 @@ Future<void> main() async {
       debugPrint(song.toString());
     }
   }
-}
-
-class MusicApp extends StatelessWidget {
-  const MusicApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
+  runApp(const MusicApp());
 }
 
 // Ctrl Alt L to format

@@ -1,0 +1,28 @@
+{
+  "songs": [
+    {
+      "id": "1",
+      "title": "Anh Đã Quen Với Cô Đơn (Lofi)",
+      "album": "Local",
+      "artist": "Soobin Hoàng Sơn",
+      "source": "https://stream.nct.vn/Warner_Audio162/AnhDaQuenVoiCoDonLofi-OrinnFreakD-9813281_hq.mp3",
+      "image": "https://image-cdn.nct.vn/singer/avatar/2025/06/20/x/5/b/l/1750408821670.jpg",
+      "duration": 216,
+      "favorite": "false",
+      "counter": 20,
+      "replay": 0
+    },
+    {
+      "id": "2",
+      "title": "Âm Thầm Bên Em",
+      "album": "Local",
+      "artist": "Dé Soltuné Montepré",
+      "source": "https://a01.nct.vn/NhacCuaTui903/AmThamBenEm-SonTungMTP-4066476_hq.mp3",
+      "image": "https://image-cdn.nct.vn/singer/avatar/2024/10/11/3/v/D/5/1728643944137.jpg",
+      "duration": 291,
+      "favorite": "false",
+      "counter": 15,
+      "replay": 0
+    }
+  ]
+}

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:spong_app/ui/auth/signin.dart';
 import '../data/repository/repository.dart';
-import '../ui/home/home.dart';
 
 Future<void> main() async {
   await dotenv.load();
 
-  var repository = MusicRepository();
-  var songs = await repository.loadData();
-  if (songs != null){
-    for (var song in songs) {
-      debugPrint(song.toString());
-    }
-  }
+  // var repository = MusicRepository();
+  // var songs = await repository.loadData();
+  // if (songs != null){
+  //   for (var song in songs) {
+  //     debugPrint(song.toString());
+  //   }
+  // }
   runApp(const MusicApp());
 }
 

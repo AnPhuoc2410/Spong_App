@@ -1,29 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:spong_app/ui/discovery/discovery.dart';
-import 'package:spong_app/ui/settings/settings.dart';
-import 'package:spong_app/ui/user/user.dart';
+import '../../data/model/song.dart';
+import '../../ui/discovery/discovery.dart';
+import '../../ui/home/viewmodel.dart';
+import '../../ui/settings/settings.dart';
+import '../../ui/user/user.dart';
 
-class MusicApp extends StatelessWidget {
-  const MusicApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Spong Music',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6366F1),
-          brightness: Brightness.dark,
-        ),
-        fontFamily: 'SF Pro Display',
-      ),
-      debugShowCheckedModeBanner: false,
-      home: const MusicHomePage(),
-    );
-  }
-}
 
 class MusicHomePage extends StatefulWidget {
   const MusicHomePage({super.key});
@@ -128,6 +111,31 @@ class _MusicHomePageState extends State<MusicHomePage> {
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const HomeTabPage();
+  }
+}
+
+class HomeTabPage extends StatefulWidget {
+  const HomeTabPage({super.key});
+
+  @override
+  State<HomeTabPage> createState() => _HomeTabPageState();
+}
+
+class _HomeTabPageState extends State<HomeTabPage> {
+  List<Song> songs = [];
+  late MusicAppViewModel _viewModel;
+
+  @override
+  void initState() {
+    _viewModel = MusicAppViewModel();
+    _viewModel.loadSongs();
+    observeData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -269,7 +277,6 @@ class HomeTab extends StatelessWidget {
       ),
     );
   }
-
   Widget _buildQuickAccessCard(String title, IconData icon, Color color) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -376,4 +383,13 @@ class HomeTab extends StatelessWidget {
       ),
     );
   }
+
+  void observeData(){
+    _viewModel.songStream.stream.listen((songList) {
+      setState(() {
+        songs = songList;
+      });
+    });
+  }
 }
+

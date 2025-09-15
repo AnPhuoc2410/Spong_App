@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spong_app/ui/home/home.dart';
+import './signup.dart';
+import '../home/home.dart';
 
 class MusicApp extends StatelessWidget {
   const MusicApp({super.key});
@@ -22,9 +23,6 @@ class MusicApp extends StatelessWidget {
   }
 }
 
-// OPTIMIZATION: Extracted the reusable text style into a top-level const
-// variable. This prevents re-creating the same TextStyle object multiple times
-// and allows widgets using it to be declared as const, improving performance.
 const TextStyle _underlineTextStyle = TextStyle(
   color: Colors.white,
   fontSize: 14,
@@ -36,12 +34,6 @@ class SigninPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // PERFORMANCE METRIC: To measure how often this widget rebuilds, you can
-    // use Flutter DevTools and enable "Highlight Rebuilds". For a static page
-    // like this, it should ideally build only once. Adding print statements is
-    // another simple way to log build calls.
-    // print("SigninPage built at ${DateTime.now()}");
-
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: const Color(0xFF3b5998),
@@ -61,9 +53,6 @@ class SigninPage extends StatelessWidget {
 
                   const SizedBox(height: 16),
 
-                  // OPTIMIZATION: Added 'const' to the Text and its style.
-                  // This widget is now a compile-time constant, so Flutter can
-                  // avoid rebuilding it unnecessarily.
                   const Text(
                     "English · Change",
                     style: TextStyle(color: Colors.white, fontSize: 14),
@@ -71,8 +60,6 @@ class SigninPage extends StatelessWidget {
 
                   const SizedBox(height: 50),
 
-                  // NOTE: TextField widgets are stateful internally to handle input.
-                  // Their properties, like decoration, can be constant.
                   const TextField(
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(color: Colors.black),
@@ -119,18 +106,16 @@ class SigninPage extends StatelessWidget {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF334d84),
-                        // OPTIMIZATION: Added 'const' to RoundedRectangleBorder.
-                        // This ensures the shape object is also a compile-time constant.
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(4)),
                         ),
                       ),
                       onPressed: () {
                         Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => const MusicHomePage()),
+                          MaterialPageRoute(
+                              builder: (context) => const MusicHomePage()),
                         );
                       },
-                      // OPTIMIZATION: Added 'const' to the Text and its style.
                       child: const Text(
                         "LOG IN",
                         style: TextStyle(fontSize: 16),
@@ -139,19 +124,34 @@ class SigninPage extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 20),
-
-                  // OPTIMIZATION: Using the pre-defined const TextStyle allows
-                  // this Text widget to also be a const.
-                  const Text(
-                    "Sign Up for Facebook",
-                    style: _underlineTextStyle,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Not Account Yet? ",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => const SignupPage()),
+                          );
+                        },
+                        child: const Text(
+                          "Create one",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
 
                   const SizedBox(height: 12),
 
-                  // OPTIMIZATION: The children of this Row are all constant.
-                  // By making the list 'const', we ensure all its elements
-                  // are also compile-time constants, improving performance.
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [

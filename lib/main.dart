@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:spong_app/ui/auth/signin.dart';
+import 'package:spong_app/ui/calculator.dart';
+import 'package:spong_app/ui/random.dart';
 import '../data/repository/repository.dart';
 
 Future<void> main() async {

@@ -1,3 +1,4 @@
+import 'package:spong_app/data/model/user.dart';
 import 'package:spong_app/data/source/source.dart';
 
 import '../model/song.dart';
@@ -25,5 +26,14 @@ class MusicRepository implements Repository {
       }
     });
     return songs;
+  }
+}
+
+class UserRepository {
+  final _userDataSource = UserDataSource();
+
+  Future<List<User>> loadUsers() async {
+    final users = await _userDataSource.loadData();
+    return users ?? [];
   }
 }

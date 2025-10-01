@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:spong_app/data/model/user.dart';
 
 import '../model/song.dart';
 import 'package:http/http.dart' as http;
@@ -35,5 +36,27 @@ class LocalDataSource implements DataSource {
     var songList = jsonData['songs'] as List;
     List<Song> songs = songList.map((song) => Song.fromJson(song)).toList();
     return songs;
+  }
+}
+
+class UserDataSource{
+  Future<List<User>?> loadData() async {
+    final url = 'https://fakestoreapi.com/users';
+    final response = await http.get(Uri.tryParse(url)!);
+    if (response.statusCode == 200) {
+      final bodyContent = utf8.decode(response.bodyBytes);
+      final data = jsonDecode(bodyContent);
+      if (data is List) {
+        return data.map((u) => User.fromJson(u as Map<String, dynamic>)).toList();
+      } else if (data is Map && data['users'] is List) {
+        // Fallback if API structure changes
+        final list = data['users'] as List;
+        return list.map((u) => User.fromJson(u as Map<String, dynamic>)).toList();
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
   }
 }
